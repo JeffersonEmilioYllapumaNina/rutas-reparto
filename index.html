@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta de Reparto</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 10px; background-color: #f8f9fa; }
+        h2 { text-align: center; color: #333; }
+        .instrucciones { font-size: 14px; text-align: center; color: #666; margin-bottom: 20px; }
+        
+        table { width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        th, td { border: 1px solid #dee2e6; padding: 12px 8px; text-align: left; font-size: 14px; }
+        th { background-color: #0056b3; color: white; position: sticky; top: 0; }
+        
+        tr { cursor: pointer; transition: background-color 0.2s; }
+        /* Color al tocar/pasar el mouse */
+        tr:hover { background-color: #e9ecef; }
+        
+        /* Estilo cuando la fila es marcada como visitada */
+        .visitado { 
+            background-color: #d4edda !important; 
+            color: #155724; 
+            opacity: 0.8;
+        }
+        .visitado td { text-decoration: line-through; }
+        
+        /* Botones de copiar */
+        .btn-container { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
+        .copy-btn { 
+            padding: 6px 10px; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            font-weight: bold;
+            text-decoration: none !important;
+        }
+        .copy-btn:active { background-color: #1e7e34; }
+        
+        @media (max-width: 600px) {
+            th, td { font-size: 12px; padding: 8px 4px; }
+            .copy-btn { padding: 4px 6px; font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <h2>Ruta de Reparto</h2>
+    <p class="instrucciones">Toca una fila para cambiar su color (marcar como entregado). Usa los botones verdes para copiar los datos.</p>
+    
+    <table id="repartoTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>WR</th>
+                <th>Dirección</th>
+                <th>Distrito</th>
+                <th>Celular</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>2</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Raimundo Carcamo 615- Urb. Santa catalina la victoria (frente al parque pinglo alva)</span>
+                        <button class="copy-btn" onclick="copyText(`Raimundo Carcamo 615- Urb. Santa catalina la victoria (frente al parque pinglo alva)`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>LA VICTORIA</td>
+                <td>
+                    <div class="btn-container">
+                        <span>999 446 100</span>
+                        <button class="copy-btn" onclick="copyText(`999 446 100`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>2</td>
+                <td>
+                    <div class="btn-container">
+                        <span>JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557</span>
+                        <button class="copy-btn" onclick="copyText(`JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SURCO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>967 706 557</span>
+                        <button class="copy-btn" onclick="copyText(`967 706 557`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>5</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Avenida Salaverry 3345, San Isidro</span>
+                        <button class="copy-btn" onclick="copyText(`Avenida Salaverry 3345, San Isidro`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SAN ISIDRO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>969 724 070</span>
+                        <button class="copy-btn" onclick="copyText(`969 724 070`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>4</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Salaverry 2387</span>
+                        <button class="copy-btn" onclick="copyText(`Salaverry 2387`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SAN ISIDRO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>993 118 965</span>
+                        <button class="copy-btn" onclick="copyText(`993 118 965`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>2</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima</span>
+                        <button class="copy-btn" onclick="copyText(`Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>BARRANCO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>954 935 788</span>
+                        <button class="copy-btn" onclick="copyText(`954 935 788`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>7</td>
+                <td>
+                    <div class="btn-container">
+                        <span>calle 10 #117 urbanización huerta guinea rimac</span>
+                        <button class="copy-btn" onclick="copyText(`calle 10 #117 urbanización huerta guinea rimac`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>RIMAC</td>
+                <td>
+                    <div class="btn-container">
+                        <span>987 013 529</span>
+                        <button class="copy-btn" onclick="copyText(`987 013 529`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>21</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Calle las dalias 108 .Pando 8 san miguel</span>
+                        <button class="copy-btn" onclick="copyText(`Calle las dalias 108 .Pando 8 san miguel`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SAN MIGUEL</td>
+                <td>
+                    <div class="btn-container">
+                        <span>970 623 468</span>
+                        <button class="copy-btn" onclick="copyText(`970 623 468`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>1</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Calle Confucio 153, Surquillo</span>
+                        <button class="copy-btn" onclick="copyText(`Calle Confucio 153, Surquillo`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SURQUILLO</td>
+                <td>
+                    <div class="btn-container">
+                        <span> 987 926 591</span>
+                        <button class="copy-btn" onclick="copyText(` 987 926 591`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>1</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Av Alfredo Benavides 768</span>
+                        <button class="copy-btn" onclick="copyText(`Av Alfredo Benavides 768`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>MIRAFLORES</td>
+                <td>
+                    <div class="btn-container">
+                        <span>982 572 701</span>
+                        <button class="copy-btn" onclick="copyText(`982 572 701`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>3</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Dirección: Calle Carlos Gonzales Candamo 251, San Miguel. Referencia: Frente a la Clínica Providencia</span>
+                        <button class="copy-btn" onclick="copyText(`Dirección: Calle Carlos Gonzales Candamo 251, San Miguel. Referencia: Frente a la Clínica Providencia`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SAN MIGUEL</td>
+                <td>
+                    <div class="btn-container">
+                        <span> 913 816 259</span>
+                        <button class="copy-btn" onclick="copyText(` 913 816 259`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>3</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Calle Jose Morelos 136  Pueblo libre</span>
+                        <button class="copy-btn" onclick="copyText(`Calle Jose Morelos 136  Pueblo libre`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>PUEBLO LIBRE</td>
+                <td>
+                    <div class="btn-container">
+                        <span>993 474 679</span>
+                        <button class="copy-btn" onclick="copyText(`993 474 679`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>2</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Sienna Bakery, av del pinar 105 A, Chacarilla del estanque - Santiago de Surco</span>
+                        <button class="copy-btn" onclick="copyText(`Sienna Bakery, av del pinar 105 A, Chacarilla del estanque - Santiago de Surco`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SURCO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>969 248 700</span>
+                        <button class="copy-btn" onclick="copyText(`969 248 700`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>2</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Lima, Distrito Miraflores,calle Coronel Inclán 421, Departamento 703</span>
+                        <button class="copy-btn" onclick="copyText(`Lima, Distrito Miraflores,calle Coronel Inclán 421, Departamento 703`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>MIRAFLORES</td>
+                <td>
+                    <div class="btn-container">
+                        <span>99 814 6510</span>
+                        <button class="copy-btn" onclick="copyText(`99 814 6510`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>10</td>
+                <td>
+                    <div class="btn-container">
+                        <span>Av el ejército 865 magdalena del mar</span>
+                        <button class="copy-btn" onclick="copyText(`Av el ejército 865 magdalena del mar`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>MAGDALENA</td>
+                <td>
+                    <div class="btn-container">
+                        <span>940 149 346</span>
+                        <button class="copy-btn" onclick="copyText(`940 149 346`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr onclick="this.classList.toggle('visitado')">
+                <td></td>
+                <td>65</td>
+                <td>
+                    <div class="btn-container">
+                        <span>nan</span>
+                        <button class="copy-btn" onclick="copyText(`nan`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>nan</td>
+                <td>
+                    <div class="btn-container">
+                        <span>nan</span>
+                        <button class="copy-btn" onclick="copyText(`nan`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+    
+        </tbody>
+    </table>
+
+    <script>
+        function copyText(text, event) {
+            // Evita que al hacer clic en "Copiar" se cambie el color de la fila
+            event.stopPropagation();
+            
+            // API del portapapeles para copiar al celular/PC
+            navigator.clipboard.writeText(text).then(function() {
+                // Pequeña alerta visual
+                let btn = event.target;
+                let originalText = btn.innerText;
+                btn.innerText = "¡Copiado!";
+                btn.style.backgroundColor = "#ffc107";
+                btn.style.color = "#000";
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = "#28a745";
+                    btn.style.color = "#fff";
+                }, 1500);
+            }).catch(function(err) {
+                alert('Error al copiar. Intenta seleccionar el texto manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>
