@@ -28,7 +28,6 @@
         h2 { text-align: center; color: var(--primary); margin-top: 5px; font-size: 22px; }
         .instrucciones { font-size: 14px; text-align: center; color: var(--text-muted); margin-bottom: 20px; }
         
-        /* Contenedor principal para comportamiento de tarjeta en móviles */
         .reparto-container { width: 100%; max-width: 800px; margin: 0 auto; }
         
         .cliente-card {
@@ -52,7 +51,6 @@
             color: var(--text-muted);
         }
 
-        /* Cabecera de la tarjeta (Nombre del cliente) */
         .cliente-header {
             padding: 15px;
             background-color: #f8f9fa;
@@ -91,7 +89,6 @@
             transform: rotate(90deg);
         }
 
-        /* Cuerpo de la tarjeta (Datos y botones) */
         .cliente-body {
             padding: 15px;
             display: flex;
@@ -117,7 +114,6 @@
             line-height: 1.4;
         }
 
-        /* Botones grandes para dedos en pantallas táctiles */
         .copy-btn {
             width: 100%;
             padding: 12px;
@@ -134,7 +130,6 @@
         
         .copy-btn:active { background-color: var(--success-dark); }
 
-        /* Sección de Paquetes desplegable */
         .paquetes-section {
             display: none;
             background-color: #fff;
@@ -160,17 +155,17 @@
         .paquete-item.entregado {
             color: var(--success);
             text-decoration: line-through;
+            background-color: #f8fff9;
         }
 
-        /* Checkbox escalado para móviles */
         input[type="checkbox"] {
             width: 22px;
             height: 22px;
             margin-right: 12px;
             accent-color: var(--success);
+            pointer-events: none;
         }
 
-        /* Diseño para pantallas un poco más grandes (Tablets) */
         @media (min-width: 600px) {
             .cliente-body { flex-direction: row; justify-content: space-between; align-items: flex-end; }
             .info-row { flex: 1; }
@@ -565,7 +560,6 @@
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => btnFeedback(event.target));
             } else {
-                // Fallback para Safari antiguo o sin HTTPS
                 let textArea = document.createElement("textarea");
                 textArea.value = text;
                 textArea.style.position = "fixed";
@@ -604,9 +598,7 @@
             event.stopPropagation();
             let checkbox = itemElement.querySelector('input[type="checkbox"]');
             
-            if (event.target !== checkbox) {
-                checkbox.checked = !checkbox.checked;
-            }
+            checkbox.checked = !checkbox.checked;
             
             if (checkbox.checked) {
                 itemElement.classList.add('entregado');
@@ -614,7 +606,6 @@
                 itemElement.classList.remove('entregado');
             }
 
-            // Validar si todos los paquetes están listos para marcar la tarjeta principal
             let section = itemElement.closest('.paquetes-section');
             let total = section.querySelectorAll('.paquete-item').length;
             let entregados = section.querySelectorAll('.paquete-item.entregado').length;
@@ -622,7 +613,6 @@
 
             if (total > 0 && total === entregados) {
                 card.classList.add('visitado');
-                // Opcional: Contraer la tarjeta automáticamente tras 1 segundo
                 setTimeout(() => { card.classList.remove('expanded'); }, 800);
             } else {
                 card.classList.remove('visitado');
