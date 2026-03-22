@@ -8,18 +8,31 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 10px; background-color: #f4f7f6; }
         h2 { text-align: center; color: #2c3e50; }
+        .instrucciones { font-size: 13px; text-align: center; color: #666; margin-bottom: 15px; }
         table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        th { background-color: #0056b3; color: white; padding: 12px; font-size: 13px; text-transform: uppercase; }
+        th { background-color: #0056b3; color: white; padding: 12px; font-size: 13px; text-transform: uppercase; position: sticky; top: 0; }
         td { border-bottom: 1px solid #eee; padding: 12px 8px; font-size: 14px; vertical-align: middle; }
-        tr:last-child td { border-bottom: none; }
+        
+        .main-row { cursor: pointer; transition: background-color 0.2s; }
+        .main-row:hover { background-color: #e9ecef; }
+        
+        /* Estilos fila visitada (todo completado) */
         .visitado { background-color: #d4edda !important; }
         .visitado td { text-decoration: line-through; color: #6c757d; }
+        
+        /* Estilos Sub-menú de Paquetes */
+        .toggle-btn { display: inline-block; width: 20px; font-weight: bold; color: #0056b3; transition: transform 0.2s; }
+        .paquetes-row { display: none; background-color: #f8f9fa; border-left: 4px solid #0056b3; }
+        .paquetes-row.active { display: table-row; }
+        .paquetes-container { padding: 10px; }
+        .paquete-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px dashed #ccc; cursor: pointer; }
+        .paquete-item:last-child { border-bottom: none; }
+        .paquete-item.entregado { text-decoration: line-through; color: #28a745; background-color: #e2f3e5; border-radius: 4px; }
+        
         .btn-container { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        .copy-btn {
-            padding: 8px 12px; background-color: #28a745; color: white; border: none;
-            border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: bold;
-        }
+        .copy-btn { padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: bold; }
         .nombre-cliente { font-weight: bold; color: #0056b3; }
+        
         @media (max-width: 600px) {
             th, td { font-size: 11px; padding: 8px 4px; }
             .copy-btn { padding: 6px 8px; }
@@ -28,6 +41,7 @@
 </head>
 <body>
     <h2>Ruta de Reparto - 22/03/2026</h2>
+    <p class="instrucciones">Toca el ícono ▶ para ver y marcar los paquetes (WR). Usa los botones para copiar.</p>
     <table id="tabla">
         <thead>
             <tr>
@@ -40,135 +54,78 @@
         </thead>
         <tbody>
 
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">PATRICIA CUSTODIO</td>
-                <td style="text-align:center">2</td>
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> LUANA ZAPATA BENGOA</td>
+                <td style="text-align:center"><b>1</b></td>
                 <td>
                     <div class="btn-container">
-                        <span>Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima</span>
-                        <button class="copy-btn" onclick="copyText(`Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>BARRANCO</td>
-                <td>
-                    <div class="btn-container">
-                        <span>954 935 788</span>
-                        <button class="copy-btn" onclick="copyText(`954 935 788`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">LUANA ZAPATA BENGOA</td>
-                <td style="text-align:center">2</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Raimundo Carcamo 615- Urb. Santa catalina la victoria (frente al parque pinglo alva)</span>
-                        <button class="copy-btn" onclick="copyText(`Raimundo Carcamo 615- Urb. Santa catalina la victoria (frente al parque pinglo alva)`, event)">Copiar</button>
+                        <span>Raimundo Carcamo 615- Urb. Santa catalina la victoria</span>
+                        <button class="copy-btn" onclick="copyText(`Raimundo Carcamo 615- Urb. Santa catalina la victoria`, event)">Copiar</button>
                     </div>
                 </td>
                 <td>LA VICTORIA</td>
                 <td>
                     <div class="btn-container">
                         <span>999 446 100</span>
-                        <button class="copy-btn" onclick="copyText(`999 446 100`, event)">Llamar/Copiar</button>
+                        <button class="copy-btn" onclick="copyText(`999 446 100`, event)">Copiar</button>
                     </div>
                 </td>
             </tr>
         
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">VASCO TORRES ORMEÑO</td>
-                <td style="text-align:center">10</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Av el ejército 865 magdalena del mar</span>
-                        <button class="copy-btn" onclick="copyText(`Av el ejército 865 magdalena del mar`, event)">Copiar</button>
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373023</strong>
+                        </div>
+                
                     </div>
                 </td>
-                <td>MAGDALENA</td>
+            </tr>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> VIRGINIA MEZA-FIORELLA SENSE</td>
+                <td style="text-align:center"><b>2</b></td>
                 <td>
                     <div class="btn-container">
-                        <span>940 149 346</span>
-                        <button class="copy-btn" onclick="copyText(`940 149 346`, event)">Llamar/Copiar</button>
+                        <span>JR. DAVID ROCA VAREA SUR 219, SURCO</span>
+                        <button class="copy-btn" onclick="copyText(`JR. DAVID ROCA VAREA SUR 219, SURCO`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>SURCO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>967 706 557</span>
+                        <button class="copy-btn" onclick="copyText(`967 706 557`, event)">Copiar</button>
                     </div>
                 </td>
             </tr>
         
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">ERICK MENDOZA SANCHEZ</td>
-                <td style="text-align:center">1</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Av Alfredo Benavides 768</span>
-                        <button class="copy-btn" onclick="copyText(`Av Alfredo Benavides 768`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>MIRAFLORES</td>
-                <td>
-                    <div class="btn-container">
-                        <span>982 572 701</span>
-                        <button class="copy-btn" onclick="copyText(`982 572 701`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">GLADYS GABRIELA ROMERO LITUMA-MARCO FLORES</td>
-                <td style="text-align:center">2</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Lima, Distrito Miraflores,calle Coronel Inclán 421, Departamento 703</span>
-                        <button class="copy-btn" onclick="copyText(`Lima, Distrito Miraflores,calle Coronel Inclán 421, Departamento 703`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>MIRAFLORES</td>
-                <td>
-                    <div class="btn-container">
-                        <span>99 814 6510</span>
-                        <button class="copy-btn" onclick="copyText(`99 814 6510`, event)">Llamar/Copiar</button>
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>366376</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>369193</strong>
+                        </div>
+                
                     </div>
                 </td>
             </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">YRAN OLIVA</td>
-                <td style="text-align:center">3</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Calle Jose Morelos 136  Pueblo libre</span>
-                        <button class="copy-btn" onclick="copyText(`Calle Jose Morelos 136  Pueblo libre`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>PUEBLO LIBRE</td>
-                <td>
-                    <div class="btn-container">
-                        <span>993 474 679</span>
-                        <button class="copy-btn" onclick="copyText(`993 474 679`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">ROSARIO VASQUEZ</td>
-                <td style="text-align:center">7</td>
-                <td>
-                    <div class="btn-container">
-                        <span>calle 10 #117 urbanización huerta guinea rimac</span>
-                        <button class="copy-btn" onclick="copyText(`calle 10 #117 urbanización huerta guinea rimac`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>RIMAC</td>
-                <td>
-                    <div class="btn-container">
-                        <span>987 013 529</span>
-                        <button class="copy-btn" onclick="copyText(`987 013 529`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">ARIANA RUESTA PASTOR</td>
-                <td style="text-align:center">5</td>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> ARIANA RUESTA PASTOR</td>
+                <td style="text-align:center"><b>5</b></td>
                 <td>
                     <div class="btn-container">
                         <span>Avenida Salaverry 3345, San Isidro</span>
@@ -179,14 +136,48 @@
                 <td>
                     <div class="btn-container">
                         <span>969 724 070</span>
-                        <button class="copy-btn" onclick="copyText(`969 724 070`, event)">Llamar/Copiar</button>
+                        <button class="copy-btn" onclick="copyText(`969 724 070`, event)">Copiar</button>
                     </div>
                 </td>
             </tr>
         
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">LUIS BARRERA</td>
-                <td style="text-align:center">4</td>
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373705</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373297</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>372990</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>372630</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>372469</strong>
+                        </div>
+                
+                    </div>
+                </td>
+            </tr>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> LUIS BARRERA</td>
+                <td style="text-align:center"><b>3</b></td>
                 <td>
                     <div class="btn-container">
                         <span>Salaverry 2387</span>
@@ -197,14 +188,137 @@
                 <td>
                     <div class="btn-container">
                         <span>993 118 965</span>
-                        <button class="copy-btn" onclick="copyText(`993 118 965`, event)">Llamar/Copiar</button>
+                        <button class="copy-btn" onclick="copyText(`993 118 965`, event)">Copiar</button>
                     </div>
                 </td>
             </tr>
         
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">OSCAR HURTADO</td>
-                <td style="text-align:center">21</td>
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373892</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373897</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373898</strong>
+                        </div>
+                
+                    </div>
+                </td>
+            </tr>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> PATRICIA CUSTODIO</td>
+                <td style="text-align:center"><b>2</b></td>
+                <td>
+                    <div class="btn-container">
+                        <span>Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima</span>
+                        <button class="copy-btn" onclick="copyText(`Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>BARRANCO</td>
+                <td>
+                    <div class="btn-container">
+                        <span>954 935 788</span>
+                        <button class="copy-btn" onclick="copyText(`954 935 788`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>370809</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>370808</strong>
+                        </div>
+                
+                    </div>
+                </td>
+            </tr>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> ROSARIO VASQUEZ</td>
+                <td style="text-align:center"><b>7</b></td>
+                <td>
+                    <div class="btn-container">
+                        <span>calle 10 #117 urbanización huerta guinea rimac</span>
+                        <button class="copy-btn" onclick="copyText(`calle 10 #117 urbanización huerta guinea rimac`, event)">Copiar</button>
+                    </div>
+                </td>
+                <td>RIMAC</td>
+                <td>
+                    <div class="btn-container">
+                        <span>987 013 529</span>
+                        <button class="copy-btn" onclick="copyText(`987 013 529`, event)">Copiar</button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373401</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373882</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>372398</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373858</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>372225</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>371423</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>373836</strong>
+                        </div>
+                
+                    </div>
+                </td>
+            </tr>
+            
+            <tr class="main-row" onclick="toggleMainRow(this, true, event)">
+                <td class="nombre-cliente"><span class='toggle-btn'>▶</span> OSCAR HURTADO</td>
+                <td style="text-align:center"><b>21</b></td>
                 <td>
                     <div class="btn-container">
                         <span>Calle las dalias 108 .Pando 8 san miguel</span>
@@ -215,80 +329,190 @@
                 <td>
                     <div class="btn-container">
                         <span>970 623 468</span>
-                        <button class="copy-btn" onclick="copyText(`970 623 468`, event)">Llamar/Copiar</button>
+                        <button class="copy-btn" onclick="copyText(`970 623 468`, event)">Copiar</button>
                     </div>
                 </td>
             </tr>
         
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">YORDDY RODRIGUEZ LEON-PAOLA ZAMBRANO</td>
-                <td style="text-align:center">3</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Dirección: Calle Carlos Gonzales Candamo 251, San Miguel. Referencia: Frente a la Clínica Providencia</span>
-                        <button class="copy-btn" onclick="copyText(`Dirección: Calle Carlos Gonzales Candamo 251, San Miguel. Referencia: Frente a la Clínica Providencia`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>SAN MIGUEL</td>
-                <td>
-                    <div class="btn-container">
-                        <span>913 816 259</span>
-                        <button class="copy-btn" onclick="copyText(`913 816 259`, event)">Llamar/Copiar</button>
+            <tr class="paquetes-row">
+                <td colspan="5">
+                    <div class="paquetes-container">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Códigos de paquetes a entregar:</div>
+            
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>376249</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>378662</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>381075</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>383488</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>385901</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>388314</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>390727</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>393140</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>395553</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>397966</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>400379</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>402792</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>405205</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>407618</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>410031</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>412444</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>414857</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>417270</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>419683</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>422096</strong>
+                        </div>
+                
+                        <div class="paquete-item" onclick="togglePaquete(this, event)">
+                            <input type="checkbox" style="transform: scale(1.2);"> 
+                            <strong>424509</strong>
+                        </div>
+                
                     </div>
                 </td>
             </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">VIRGINIA MEZA-FIORELLA SENSE</td>
-                <td style="text-align:center">2</td>
-                <td>
-                    <div class="btn-container">
-                        <span>JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557</span>
-                        <button class="copy-btn" onclick="copyText(`JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>SURCO</td>
-                <td>
-                    <div class="btn-container">
-                        <span>967 706 557</span>
-                        <button class="copy-btn" onclick="copyText(`967 706 557`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">KARLA BENAVENTE</td>
-                <td style="text-align:center">2</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Sienna Bakery, av del pinar 105 A, Chacarilla del estanque - Santiago de Surco</span>
-                        <button class="copy-btn" onclick="copyText(`Sienna Bakery, av del pinar 105 A, Chacarilla del estanque - Santiago de Surco`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>SURCO</td>
-                <td>
-                    <div class="btn-container">
-                        <span>969 248 700</span>
-                        <button class="copy-btn" onclick="copyText(`969 248 700`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
-            <tr onclick="this.classList.toggle('visitado')">
-                <td class="nombre-cliente">GIANFRANCO RIZO</td>
-                <td style="text-align:center">1</td>
-                <td>
-                    <div class="btn-container">
-                        <span>Calle Confucio 153, Surquillo</span>
-                        <button class="copy-btn" onclick="copyText(`Calle Confucio 153, Surquillo`, event)">Copiar</button>
-                    </div>
-                </td>
-                <td>SURQUILLO</td>
-                <td>
-                    <div class="btn-container">
-                        <span>987 926 591</span>
-                        <button class="copy-btn" onclick="copyText(`987 926 591`, event)">Llamar/Copiar</button>
-                    </div>
-                </td>
-            </tr>
-        
+            
+        </tbody>
+    </table>
+
+    <script>
+        // Función para copiar texto sin activar el clic de la fila
+        function copyText(text, event) {
+            event.stopPropagation();
+            navigator.clipboard.writeText(text).then(() => {
+                let btn = event.target;
+                let originalText = btn.innerText;
+                btn.innerText = '¡Copiado!';
+                btn.style.backgroundColor = '#1e7e34';
+                setTimeout(() => { 
+                    btn.innerText = originalText; 
+                    btn.style.backgroundColor = '#28a745';
+                }, 1500);
+            });
+        }
+
+        // Función para expandir paquetes o marcar fila principal
+        function toggleMainRow(row, tienePaquetes, event) {
+            // Ignorar si se hizo clic en un botón de copiar
+            if(event.target.tagName === 'BUTTON') return;
+
+            if (tienePaquetes) {
+                let nextRow = row.nextElementSibling;
+                let isExpanded = nextRow.classList.toggle('active');
+                let toggleBtn = row.querySelector('.toggle-btn');
+                toggleBtn.innerText = isExpanded ? '▼' : '▶';
+            } else {
+                // Si no tiene paquetes detallados, solo se marca toda la fila
+                row.classList.toggle('visitado');
+            }
+        }
+
+        // Función para marcar cada paquete individual
+        function togglePaquete(itemElement, event) {
+            event.stopPropagation();
+            
+            let checkbox = itemElement.querySelector('input[type="checkbox"]');
+            
+            // Si el clic no fue directamente en el checkbox, cambiar su estado manualmente
+            if (event.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+            
+            // Alternar clase visual
+            if (checkbox.checked) {
+                itemElement.classList.add('entregado');
+            } else {
+                itemElement.classList.remove('entregado');
+            }
+
+            // Lógica para auto-tachar la fila principal si todos los paquetes están entregados
+            let container = itemElement.closest('.paquetes-container');
+            let total = container.querySelectorAll('.paquete-item').length;
+            let entregados = container.querySelectorAll('.paquete-item.entregado').length;
+            let mainRow = itemElement.closest('.paquetes-row').previousElementSibling;
+
+            if (total > 0 && total === entregados) {
+                mainRow.classList.add('visitado');
+            } else {
+                mainRow.classList.remove('visitado');
+            }
+        }
+    </script>
+</body>
+</html>
