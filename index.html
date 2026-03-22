@@ -25,10 +25,10 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        h2 { text-align: center; color: var(--primary); margin-top: 5px; font-size: 22px; margin-bottom: 5px; }
-        .instrucciones { font-size: 13px; text-align: center; color: var(--text-muted); margin-bottom: 5px; line-height: 1.4; }
-        .badge-guardado { display: block; text-align: center; font-size: 11px; color: var(--success); font-weight: bold; margin-bottom: 20px; }
+        h2 { text-align: center; color: var(--primary); margin-top: 5px; font-size: 22px; }
+        .instrucciones { font-size: 14px; text-align: center; color: var(--text-muted); margin-bottom: 20px; }
         
+        /* Contenedor principal para comportamiento de tarjeta en móviles */
         .reparto-container { width: 100%; max-width: 800px; margin: 0 auto; }
         
         .cliente-card {
@@ -52,6 +52,7 @@
             color: var(--text-muted);
         }
 
+        /* Cabecera de la tarjeta (Nombre del cliente) */
         .cliente-header {
             padding: 15px;
             background-color: #f8f9fa;
@@ -62,30 +63,114 @@
             cursor: pointer;
         }
         
-        .cliente-header h3 { margin: 0; font-size: 16px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-        .badge-cantidad { background: var(--primary); color: white; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
-        .toggle-icon { font-size: 14px; color: var(--primary); transition: transform 0.3s; }
-        .cliente-card.expanded .toggle-icon { transform: rotate(90deg); }
-
-        .cliente-body { padding: 15px; display: flex; flex-direction: column; gap: 12px; }
-        .info-row { display: flex; flex-direction: column; gap: 6px; }
-        .info-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
-        .info-content { font-size: 14px; line-height: 1.4; }
-
-        .copy-btn {
-            width: 100%; padding: 12px; background-color: var(--success); color: white; 
-            border: none; border-radius: 8px; font-size: 14px; font-weight: 600; 
-            cursor: pointer; text-align: center; -webkit-tap-highlight-color: transparent;
+        .cliente-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .badge-cantidad {
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .toggle-icon {
+            font-size: 14px;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .cliente-card.expanded .toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        /* Cuerpo de la tarjeta (Datos y botones) */
+        .cliente-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        
+        .info-content {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Botones grandes para dedos en pantallas táctiles */
+        .copy-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
         .copy-btn:active { background-color: var(--success-dark); }
 
-        .paquetes-section { display: none; background-color: #fff; padding: 0 15px 15px 15px; border-top: 1px dashed #eee; }
-        .cliente-card.expanded .paquetes-section { display: block; }
-        .paquete-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f1f1; font-size: 15px; cursor: pointer; }
-        .paquete-item:last-child { border-bottom: none; }
-        .paquete-item.entregado { color: var(--success); text-decoration: line-through; background-color: #f8fff9; }
-        input[type="checkbox"] { width: 22px; height: 22px; margin-right: 12px; accent-color: var(--success); pointer-events: none; }
+        /* Sección de Paquetes desplegable */
+        .paquetes-section {
+            display: none;
+            background-color: #fff;
+            padding: 0 15px 15px 15px;
+            border-top: 1px dashed #eee;
+        }
+        
+        .cliente-card.expanded .paquetes-section {
+            display: block;
+        }
 
+        .paquete-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        
+        .paquete-item:last-child { border-bottom: none; }
+        
+        .paquete-item.entregado {
+            color: var(--success);
+            text-decoration: line-through;
+        }
+
+        /* Checkbox escalado para móviles */
+        input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            accent-color: var(--success);
+        }
+
+        /* Diseño para pantallas un poco más grandes (Tablets) */
         @media (min-width: 600px) {
             .cliente-body { flex-direction: row; justify-content: space-between; align-items: flex-end; }
             .info-row { flex: 1; }
@@ -95,8 +180,7 @@
 </head>
 <body>
     <h2>Ruta de Reparto - 22/03/2026</h2>
-    <p class="instrucciones">Toca el cliente para ver los paquetes. Marca las casillas al entregar.</p>
-    <span class="badge-guardado">💾 El progreso se guarda automáticamente</span>
+    <p class="instrucciones">Toca el cliente para ver los paquetes (WR). Marca las casillas al entregar.</p>
     
     <div class="reparto-container">
 
@@ -476,61 +560,24 @@
     </div>
 
     <script>
-        // Clave única de guardado por día para no mezclar rutas antiguas
-        const STORAGE_KEY = 'amex_ruta_20260322';
-
-        function guardarProgreso() {
-            let estado = { visitados: [], entregados: [] };
-            
-            document.querySelectorAll('.cliente-card').forEach((card) => {
-                if (card.classList.contains('visitado')) estado.visitados.push(card.id);
-            });
-            
-            document.querySelectorAll('input[type="checkbox"]').forEach((chk, index) => {
-                if (chk.checked) estado.entregados.push(index);
-            });
-            
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
-        }
-
-        function cargarProgreso() {
-            let guardado = localStorage.getItem(STORAGE_KEY);
-            if (guardado) {
-                let estado = JSON.parse(guardado);
-                
-                estado.visitados.forEach(id => {
-                    let card = document.getElementById(id);
-                    if (card) card.classList.add('visitado');
-                });
-                
-                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                let items = document.querySelectorAll('.paquete-item');
-                
-                estado.entregados.forEach(index => {
-                    if (checkboxes[index]) {
-                        checkboxes[index].checked = true;
-                        items[index].classList.add('entregado');
-                    }
-                });
-            }
-        }
-
-        // Ejecutar carga al abrir la página
-        window.onload = cargarProgreso;
-
         function copyText(text, event) {
             event.stopPropagation();
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => btnFeedback(event.target));
             } else {
+                // Fallback para Safari antiguo o sin HTTPS
                 let textArea = document.createElement("textarea");
                 textArea.value = text;
                 textArea.style.position = "fixed";
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
-                try { document.execCommand('copy'); btnFeedback(event.target); } 
-                catch (err) { console.error('Error al copiar', err); }
+                try {
+                    document.execCommand('copy');
+                    btnFeedback(event.target);
+                } catch (err) {
+                    console.error('No se pudo copiar', err);
+                }
                 document.body.removeChild(textArea);
             }
         }
@@ -550,7 +597,6 @@
                 card.classList.toggle('expanded');
             } else {
                 card.classList.toggle('visitado');
-                guardarProgreso(); // Guardar al marcar la tarjeta completa
             }
         }
 
@@ -558,7 +604,9 @@
             event.stopPropagation();
             let checkbox = itemElement.querySelector('input[type="checkbox"]');
             
-            checkbox.checked = !checkbox.checked;
+            if (event.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
             
             if (checkbox.checked) {
                 itemElement.classList.add('entregado');
@@ -566,6 +614,7 @@
                 itemElement.classList.remove('entregado');
             }
 
+            // Validar si todos los paquetes están listos para marcar la tarjeta principal
             let section = itemElement.closest('.paquetes-section');
             let total = section.querySelectorAll('.paquete-item').length;
             let entregados = section.querySelectorAll('.paquete-item.entregado').length;
@@ -573,12 +622,11 @@
 
             if (total > 0 && total === entregados) {
                 card.classList.add('visitado');
+                // Opcional: Contraer la tarjeta automáticamente tras 1 segundo
                 setTimeout(() => { card.classList.remove('expanded'); }, 800);
             } else {
                 card.classList.remove('visitado');
             }
-            
-            guardarProgreso(); // Guardar cada vez que se toca un paquete
         }
     </script>
 </body>
