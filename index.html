@@ -15,21 +15,21 @@
             --text-main: #333333;
             --text-muted: #6c757d;
         }
-        
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            padding: 15px; 
-            background-color: var(--bg-color); 
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background-color: var(--bg-color);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
         }
-        
+
         h2 { text-align: center; color: var(--primary); margin-top: 5px; font-size: 22px; }
         .instrucciones { font-size: 14px; text-align: center; color: var(--text-muted); margin-bottom: 20px; }
-        
+
         .reparto-container { width: 100%; max-width: 800px; margin: 0 auto; }
-        
+
         .cliente-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -39,13 +39,13 @@
             border: 1px solid #e9ecef;
             transition: all 0.3s ease;
         }
-        
+
         .cliente-card.visitado {
             background-color: #e8f5e9;
             opacity: 0.8;
             border-color: #c8e6c9;
         }
-        
+
         .cliente-card.visitado .cliente-header h3 {
             text-decoration: line-through;
             color: var(--text-muted);
@@ -60,7 +60,7 @@
             align-items: center;
             cursor: pointer;
         }
-        
+
         .cliente-header h3 {
             margin: 0;
             font-size: 16px;
@@ -84,7 +84,7 @@
             color: var(--primary);
             transition: transform 0.3s;
         }
-        
+
         .cliente-card.expanded .toggle-icon {
             transform: rotate(90deg);
         }
@@ -101,14 +101,14 @@
             flex-direction: column;
             gap: 6px;
         }
-        
+
         .info-label {
             font-size: 11px;
             text-transform: uppercase;
             color: var(--text-muted);
             font-weight: 600;
         }
-        
+
         .info-content {
             font-size: 14px;
             line-height: 1.4;
@@ -127,7 +127,7 @@
             text-align: center;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         .copy-btn:active { background-color: var(--success-dark); }
 
         .paquetes-section {
@@ -136,7 +136,7 @@
             padding: 0 15px 15px 15px;
             border-top: 1px dashed #eee;
         }
-        
+
         .cliente-card.expanded .paquetes-section {
             display: block;
         }
@@ -149,9 +149,9 @@
             font-size: 15px;
             cursor: pointer;
         }
-        
+
         .paquete-item:last-child { border-bottom: none; }
-        
+
         .paquete-item.entregado {
             color: var(--success);
             text-decoration: line-through;
@@ -174,27 +174,27 @@
     </style>
 </head>
 <body>
-    <h2>Ruta de Reparto - 22/03/2026</h2>
+    <h2>Ruta de Reparto - 24/03/2026</h2>
     <p class="instrucciones">Toca el cliente para ver los paquetes (WR). Marca las casillas al entregar.</p>
-    
+
     <div class="reparto-container">
 
         <div class="cliente-card" id="card-0">
             <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> LUANA ZAPATA BENGOA <span class='badge-cantidad'>1</span></h3>
-                <span style="font-size:12px; color:#666;">LA VICTORIA</span>
+                <h3><span class='toggle-icon'>▶</span> KEYTLIN UBAQUI <span class='badge-cantidad'>2</span></h3>
+                <span style="font-size:12px; color:#666;">LA MOLINA</span>
             </div>
-            
+
             <div class="cliente-body">
                 <div class="info-row" style="flex: 2;">
                     <span class="info-label">Dirección</span>
-                    <span class="info-content">Raimundo Carcamo 615- Urb. Santa catalina la victoria</span>
-                    <button class="copy-btn" onclick="copyText(`Raimundo Carcamo 615- Urb. Santa catalina la victoria`, event)">Copiar Dirección</button>
+                    <span class="info-content">Jr las Moreras 149, la Molina</span>
+                    <button class="copy-btn" onclick="copyText(`Jr las Moreras 149, la Molina`, event)">Copiar Dirección</button>
                 </div>
                 <div class="info-row" style="flex: 1;">
                     <span class="info-label">Celular</span>
-                    <span class="info-content">999 446 100</span>
-                    <button class="copy-btn" onclick="copyText(`999 446 100`, event)">Copiar Nro</button>
+                    <span class="info-content">959 226 727</span>
+                    <button class="copy-btn" onclick="copyText(`959 226 727`, event)">Copiar Nro</button>
                 </div>
             </div>
         
@@ -202,23 +202,91 @@
                 <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
             
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373023</strong>
+                    <input type="checkbox">
+                    <strong>364137</strong>
+                </div>
+                
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>363351</strong>
                 </div>
                 
             </div>
             </div>
         <div class="cliente-card" id="card-1">
             <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> VIRGINIA MEZA-FIORELLA SENSE <span class='badge-cantidad'>2</span></h3>
-                <span style="font-size:12px; color:#666;">SURCO</span>
+                <h3><span class='toggle-icon'>▶</span> MACARENA CASTILLO LLONG <span class='badge-cantidad'>2</span></h3>
+                <span style="font-size:12px; color:#666;">LA MOLINA</span>
             </div>
-            
+
             <div class="cliente-body">
                 <div class="info-row" style="flex: 2;">
                     <span class="info-label">Dirección</span>
-                    <span class="info-content">JR. DAVID ROCA VAREA SUR 219, SURCO</span>
-                    <button class="copy-btn" onclick="copyText(`JR. DAVID ROCA VAREA SUR 219, SURCO`, event)">Copiar Dirección</button>
+                    <span class="info-content">Calle Los Castaños 124, Urb El Remanso, La Molina</span>
+                    <button class="copy-btn" onclick="copyText(`Calle Los Castaños 124, Urb El Remanso, La Molina`, event)">Copiar Dirección</button>
+                </div>
+                <div class="info-row" style="flex: 1;">
+                    <span class="info-label">Celular</span>
+                    <span class="info-content">997 569 804</span>
+                    <button class="copy-btn" onclick="copyText(`997 569 804`, event)">Copiar Nro</button>
+                </div>
+            </div>
+        
+            <div class="paquetes-section">
+                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
+            
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>376054</strong>
+                </div>
+                
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>376775</strong>
+                </div>
+                
+            </div>
+            </div>
+        <div class="cliente-card" id="card-2">
+            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
+                <h3><span class='toggle-icon'>▶</span> JOAQUIN FERNANDEZ <span class='badge-cantidad'>1</span></h3>
+                <span style="font-size:12px; color:#666;">SAN BORJA</span>
+            </div>
+
+            <div class="cliente-body">
+                <div class="info-row" style="flex: 2;">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-content">Calle 26, 219. Dpto 102, SAN BORJA</span>
+                    <button class="copy-btn" onclick="copyText(`Calle 26, 219. Dpto 102, SAN BORJA`, event)">Copiar Dirección</button>
+                </div>
+                <div class="info-row" style="flex: 1;">
+                    <span class="info-label">Celular</span>
+                    <span class="info-content">979 034 761</span>
+                    <button class="copy-btn" onclick="copyText(`979 034 761`, event)">Copiar Nro</button>
+                </div>
+            </div>
+        
+            <div class="paquetes-section">
+                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
+            
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377777</strong>
+                </div>
+                
+            </div>
+            </div>
+        <div class="cliente-card" id="card-3">
+            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
+                <h3><span class='toggle-icon'>▶</span> VIRGINIA MEZA-FIORELLA SENSE <span class='badge-cantidad'>2</span></h3>
+                <span style="font-size:12px; color:#666;">SURCO</span>
+            </div>
+
+            <div class="cliente-body">
+                <div class="info-row" style="flex: 2;">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-content">JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557</span>
+                    <button class="copy-btn" onclick="copyText(`JR. DAVID ROCA VAREA SUR 219, SURCO / CEL: 967 706 557`, event)">Copiar Dirección</button>
                 </div>
                 <div class="info-row" style="flex: 1;">
                     <span class="info-label">Celular</span>
@@ -231,121 +299,33 @@
                 <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
             
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>366376</strong>
+                    <input type="checkbox">
+                    <strong>375856</strong>
                 </div>
                 
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>369193</strong>
-                </div>
-                
-            </div>
-            </div>
-        <div class="cliente-card" id="card-2">
-            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> ARIANA RUESTA PASTOR <span class='badge-cantidad'>5</span></h3>
-                <span style="font-size:12px; color:#666;">SAN ISIDRO</span>
-            </div>
-            
-            <div class="cliente-body">
-                <div class="info-row" style="flex: 2;">
-                    <span class="info-label">Dirección</span>
-                    <span class="info-content">Avenida Salaverry 3345, San Isidro</span>
-                    <button class="copy-btn" onclick="copyText(`Avenida Salaverry 3345, San Isidro`, event)">Copiar Dirección</button>
-                </div>
-                <div class="info-row" style="flex: 1;">
-                    <span class="info-label">Celular</span>
-                    <span class="info-content">969 724 070</span>
-                    <button class="copy-btn" onclick="copyText(`969 724 070`, event)">Copiar Nro</button>
-                </div>
-            </div>
-        
-            <div class="paquetes-section">
-                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
-            
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373705</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373297</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>372990</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>372630</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>372469</strong>
-                </div>
-                
-            </div>
-            </div>
-        <div class="cliente-card" id="card-3">
-            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> LUIS BARRERA <span class='badge-cantidad'>3</span></h3>
-                <span style="font-size:12px; color:#666;">SAN ISIDRO</span>
-            </div>
-            
-            <div class="cliente-body">
-                <div class="info-row" style="flex: 2;">
-                    <span class="info-label">Dirección</span>
-                    <span class="info-content">Salaverry 2387</span>
-                    <button class="copy-btn" onclick="copyText(`Salaverry 2387`, event)">Copiar Dirección</button>
-                </div>
-                <div class="info-row" style="flex: 1;">
-                    <span class="info-label">Celular</span>
-                    <span class="info-content">993 118 965</span>
-                    <button class="copy-btn" onclick="copyText(`993 118 965`, event)">Copiar Nro</button>
-                </div>
-            </div>
-        
-            <div class="paquetes-section">
-                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
-            
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373892</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373897</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373898</strong>
+                    <input type="checkbox">
+                    <strong>376032</strong>
                 </div>
                 
             </div>
             </div>
         <div class="cliente-card" id="card-4">
             <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> PATRICIA CUSTODIO <span class='badge-cantidad'>2</span></h3>
-                <span style="font-size:12px; color:#666;">BARRANCO</span>
+                <h3><span class='toggle-icon'>▶</span> GIANFRANCO RIZO <span class='badge-cantidad'>4</span></h3>
+                <span style="font-size:12px; color:#666;">SURQUILLO</span>
             </div>
-            
+
             <div class="cliente-body">
                 <div class="info-row" style="flex: 2;">
                     <span class="info-label">Dirección</span>
-                    <span class="info-content">Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima</span>
-                    <button class="copy-btn" onclick="copyText(`Malecon Mariscal Ramón Castilla 100, dep 102, Barranco Lima`, event)">Copiar Dirección</button>
+                    <span class="info-content">Calle Confucio 153, Surquillo</span>
+                    <button class="copy-btn" onclick="copyText(`Calle Confucio 153, Surquillo`, event)">Copiar Dirección</button>
                 </div>
                 <div class="info-row" style="flex: 1;">
                     <span class="info-label">Celular</span>
-                    <span class="info-content">954 935 788</span>
-                    <button class="copy-btn" onclick="copyText(`954 935 788`, event)">Copiar Nro</button>
+                    <span class="info-content">987 926 591</span>
+                    <button class="copy-btn" onclick="copyText(`987 926 591`, event)">Copiar Nro</button>
                 </div>
             </div>
         
@@ -353,33 +333,43 @@
                 <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
             
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>370809</strong>
+                    <input type="checkbox">
+                    <strong>376364</strong>
                 </div>
                 
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>370808</strong>
+                    <input type="checkbox">
+                    <strong>377604</strong>
+                </div>
+                
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377742</strong>
+                </div>
+                
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377775</strong>
                 </div>
                 
             </div>
             </div>
         <div class="cliente-card" id="card-5">
             <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> ROSARIO VASQUEZ <span class='badge-cantidad'>7</span></h3>
-                <span style="font-size:12px; color:#666;">RIMAC</span>
+                <h3><span class='toggle-icon'>▶</span> MARCO PALACIOS <span class='badge-cantidad'>1</span></h3>
+                <span style="font-size:12px; color:#666;">SURCO</span>
             </div>
-            
+
             <div class="cliente-body">
                 <div class="info-row" style="flex: 2;">
                     <span class="info-label">Dirección</span>
-                    <span class="info-content">calle 10 #117 urbanización huerta guinea rimac</span>
-                    <button class="copy-btn" onclick="copyText(`calle 10 #117 urbanización huerta guinea rimac`, event)">Copiar Dirección</button>
+                    <span class="info-content">Jirón Batallón Tarma 684 Departamento 002, SURCO  / a nombre de eva palacios</span>
+                    <button class="copy-btn" onclick="copyText(`Jirón Batallón Tarma 684 Departamento 002, SURCO  / a nombre de eva palacios`, event)">Copiar Dirección</button>
                 </div>
                 <div class="info-row" style="flex: 1;">
                     <span class="info-label">Celular</span>
-                    <span class="info-content">987 013 529</span>
-                    <button class="copy-btn" onclick="copyText(`987 013 529`, event)">Copiar Nro</button>
+                    <span class="info-content">945 825 478</span>
+                    <button class="copy-btn" onclick="copyText(`945 825 478`, event)">Copiar Nro</button>
                 </div>
             </div>
         
@@ -387,58 +377,28 @@
                 <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
             
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373401</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373882</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>372398</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373858</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>372225</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>371423</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>373836</strong>
+                    <input type="checkbox">
+                    <strong>377561</strong>
                 </div>
                 
             </div>
             </div>
         <div class="cliente-card" id="card-6">
             <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
-                <h3><span class='toggle-icon'>▶</span> OSCAR HURTADO <span class='badge-cantidad'>21</span></h3>
-                <span style="font-size:12px; color:#666;">SAN MIGUEL</span>
+                <h3><span class='toggle-icon'>▶</span> SIMONE SCHIAFFINO <span class='badge-cantidad'>1</span></h3>
+                <span style="font-size:12px; color:#666;">MIRAFLORES</span>
             </div>
-            
+
             <div class="cliente-body">
                 <div class="info-row" style="flex: 2;">
                     <span class="info-label">Dirección</span>
-                    <span class="info-content">Calle las dalias 108 .Pando 8 san miguel</span>
-                    <button class="copy-btn" onclick="copyText(`Calle las dalias 108 .Pando 8 san miguel`, event)">Copiar Dirección</button>
+                    <span class="info-content">Calle General Borgoño 347, MIRAFLORES</span>
+                    <button class="copy-btn" onclick="copyText(`Calle General Borgoño 347, MIRAFLORES`, event)">Copiar Dirección</button>
                 </div>
                 <div class="info-row" style="flex: 1;">
                     <span class="info-label">Celular</span>
-                    <span class="info-content">970 623 468</span>
-                    <button class="copy-btn" onclick="copyText(`970 623 468`, event)">Copiar Nro</button>
+                    <span class="info-content">930 143 889</span>
+                    <button class="copy-btn" onclick="copyText(`930 143 889`, event)">Copiar Nro</button>
                 </div>
             </div>
         
@@ -446,108 +406,100 @@
                 <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
             
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>376249</strong>
+                    <input type="checkbox">
+                    <strong>377987</strong>
+                </div>
+                
+            </div>
+            </div>
+        <div class="cliente-card" id="card-7">
+            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
+                <h3><span class='toggle-icon'>▶</span> CLAUDIA COVARRUBIAS <span class='badge-cantidad'>1</span></h3>
+                <span style="font-size:12px; color:#666;">SAN ISIDRO</span>
+            </div>
+
+            <div class="cliente-body">
+                <div class="info-row" style="flex: 2;">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-content">san isidro recojo</span>
+                    <button class="copy-btn" onclick="copyText(`san isidro recojo`, event)">Copiar Dirección</button>
+                </div>
+                <div class="info-row" style="flex: 1;">
+                    <span class="info-label">Celular</span>
+                    <span class="info-content"></span>
+                    <button class="copy-btn" onclick="copyText(``, event)">Copiar Nro</button>
+                </div>
+            </div>
+        
+            <div class="paquetes-section">
+                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
+            
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377751</strong>
+                </div>
+                
+            </div>
+            </div>
+        <div class="cliente-card" id="card-8">
+            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
+                <h3><span class='toggle-icon'>▶</span> TABATA SUAREZ <span class='badge-cantidad'>1</span></h3>
+                <span style="font-size:12px; color:#666;">BARRANCO</span>
+            </div>
+
+            <div class="cliente-body">
+                <div class="info-row" style="flex: 2;">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-content">Av almirante Grau 1430, BARRANCO</span>
+                    <button class="copy-btn" onclick="copyText(`Av almirante Grau 1430, BARRANCO`, event)">Copiar Dirección</button>
+                </div>
+                <div class="info-row" style="flex: 1;">
+                    <span class="info-label">Celular</span>
+                    <span class="info-content">997 063 404</span>
+                    <button class="copy-btn" onclick="copyText(`997 063 404`, event)">Copiar Nro</button>
+                </div>
+            </div>
+        
+            <div class="paquetes-section">
+                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
+            
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377804</strong>
+                </div>
+                
+            </div>
+            </div>
+        <div class="cliente-card" id="card-9">
+            <div class="cliente-header" onclick="toggleCard(this.parentElement, true)">
+                <h3><span class='toggle-icon'>▶</span> MARIA PAZ VERA <span class='badge-cantidad'>2</span></h3>
+                <span style="font-size:12px; color:#666;">SURCO</span>
+            </div>
+
+            <div class="cliente-body">
+                <div class="info-row" style="flex: 2;">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-content">Av de los precursores 729 dptp 201</span>
+                    <button class="copy-btn" onclick="copyText(`Av de los precursores 729 dptp 201`, event)">Copiar Dirección</button>
+                </div>
+                <div class="info-row" style="flex: 1;">
+                    <span class="info-label">Celular</span>
+                    <span class="info-content">+1 (754) 284-5516</span>
+                    <button class="copy-btn" onclick="copyText(`+1 (754) 284-5516`, event)">Copiar Nro</button>
+                </div>
+            </div>
+        
+            <div class="paquetes-section">
+                <div class="info-label" style="margin: 10px 0;">Códigos a entregar (WR):</div>
+            
+                <div class="paquete-item" onclick="togglePaquete(this, event)">
+                    <input type="checkbox">
+                    <strong>377420</strong>
                 </div>
                 
                 <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>378662</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>381075</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>383488</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>385901</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>388314</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>390727</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>393140</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>395553</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>397966</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>400379</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>402792</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>405205</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>407618</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>410031</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>412444</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>414857</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>417270</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>419683</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>422096</strong>
-                </div>
-                
-                <div class="paquete-item" onclick="togglePaquete(this, event)">
-                    <input type="checkbox"> 
-                    <strong>424509</strong>
+                    <input type="checkbox">
+                    <strong>377389</strong>
                 </div>
                 
             </div>
@@ -580,8 +532,8 @@
             let originalText = btn.innerText;
             btn.innerText = '¡Copiado!';
             btn.style.backgroundColor = '#1e7e34';
-            setTimeout(() => { 
-                btn.innerText = originalText; 
+            setTimeout(() => {
+                btn.innerText = originalText;
                 btn.style.backgroundColor = '#28a745';
             }, 1500);
         }
@@ -597,9 +549,9 @@
         function togglePaquete(itemElement, event) {
             event.stopPropagation();
             let checkbox = itemElement.querySelector('input[type="checkbox"]');
-            
+
             checkbox.checked = !checkbox.checked;
-            
+
             if (checkbox.checked) {
                 itemElement.classList.add('entregado');
             } else {
